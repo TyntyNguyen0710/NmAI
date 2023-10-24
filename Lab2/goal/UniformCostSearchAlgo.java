@@ -3,60 +3,46 @@ package goal;
 import java.util.*;
 
 public class UniformCostSearchAlgo implements ISearchAlgo {
-	@Override
-	public Node execute(Node root, String goal, int limitedDepth) {
-		if (root == null || goal == null)
-			return null;
-
-		Node result = recursiveDLS(root, goal, limitedDepth);
-		if (result != null && result.getLabel().equals(goal)) {
-			// Goal node found, return the result
-			return result;
-		} else {
-			// Goal node not found within the limited depth
-			return null;
-		}
-	}
-
-	private Node recursiveDLS(Node node, String goal, int limit) {
-		if (node.getLabel().equals(goal)) {
-			// Goal node found, return it
-			return node;
-		} else if (limit == 0) {
-			// Depth limit reached, return cutoff
-			return null;
-		} else {
-			boolean cutoffOccurred = false;
-			for (Edge edge : node.getChildren()) {
-				Node childNode = edge.getEnd();
-				Node result = recursiveDLS(childNode, goal, limit - 1);
-				if (result == null) {
-					// Cutoff occurred at this level
-					cutoffOccurred = true;
-				} else if (!result.getLabel().equals("failure")) {
-					// Goal or valid solution found, return it
-					return result;
-				}
-			}
-
-			if (cutoffOccurred) {
-				// Cutoff occurred at this level
-				return null;
-			} else {
-				// No solution found at this level, return failure
-				return new Node("failure");
-			}
-		}
-	}
 
 	@Override
 	public Node execute(Node root, String goal) {
-		// TODO Auto-generated method stub
+		PriorityQueue<Node> frontier = new PriorityQueue<>(new NodeComparator());
+		List<Node> explored = new LinkedList<>();
+		explored.add(root);
+		frontier.add(root);
+		while (!frontier.isEmpty()) {
+			Node current = frontier.poll();
+			if (current.getChildren().equals(goal)) {
+				return current; // Goal found, return the solution node
+			} else {
+				explored.add(current);
+				List<Edge> children = current.getChildren();
+				for (Edge child : children) {
+					double pathCost = current.getPathCost() + child.getWeight();
+					Node end = child.getEnd();
+					if (!explored.contains(end) && !frontier.contains(end)) {
+						end.setPathCost(pathCost);
+						frontier.add(end);
+						end.setParent(current);
+					} else if (end.getPathCost() > current.getPathCost()) {
+						end.setPathCost(pathCost);
+						end.setParent(current);
+					}
+				}
+			}
+		}
+
 		return null;
 	}
 
 	@Override
 	public Node execute(Node root, String start, String goal) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Node execute(Node root, String goal, int limitedDepth) {
 		// TODO Auto-generated method stub
 		return null;
 	}

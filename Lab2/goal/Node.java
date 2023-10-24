@@ -100,7 +100,8 @@ public class Node implements Comparable<Node> {
 
 	@Override
 	public int compareTo(Node o) {
-		return this.label.compareTo(o.label);
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

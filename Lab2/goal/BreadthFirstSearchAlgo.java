@@ -7,22 +7,26 @@ public class BreadthFirstSearchAlgo implements ISearchAlgo {
 	// BFS
 	public Node execute(Node root, String goal) {
 		Queue<Node> frontier = new LinkedList<Node>();
-//		Set<Node> explored = new HashSet(); //task1,2
+		Set<Node> explored = new HashSet(); // task1,2
 		frontier.add(root);
-//		explored.add(root); //task1,2
+
 		while (!frontier.isEmpty()) {
 			Node current = frontier.poll();
-			if (current.getLabel().equals(goal))
+			if (current.getLabel().equals(goal)) {
 				return current; // Find goal
-//			List<Node> children = current.getChildrenNodes();
+
+			} else {
+				explored.add(root); // task1,2
+			}
+			List<Node> children = current.getChildrenNodes();
 			for (Node child : current.getChildrenNodes()) {
-//				if (!explored.contains(child) && !frontier.contains(child)) { //task1,2
+				if (!explored.contains(child) && !frontier.contains(child)) { // task1,2
 					child.setParent(current);
 					frontier.add(child);
-//					visited.add(child);
+					explored.add(child);
 				}
 			}
-//		}
+		}
 		return null; // No path to the goal
 	}
 
