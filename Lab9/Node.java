@@ -22,8 +22,8 @@ public class Node {
 
 		for (int i = 0; i < data.size(); i++) {
 			int current = data.get(i);
-			for (int j = 0; j < data.size(); j++) {
-				if (current - j != current / 2) {
+			for (int j = 1; j <= current / 2; j++) {
+				if (j != current / 2) {
 					Node success = new Node();
 					success.add(j);
 					success.add(current - j);
