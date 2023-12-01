@@ -16,11 +16,10 @@ public class MinimaxAlgo {
 	// return v
 	public int maxValue(Node node) {
 		if (node.isTerminal()) {
-			return node.getUtility(); // Return utility value if the node is a terminal node
+			return 0; // Return utility value if the node is a terminal node
 		}
 		int v = Integer.MIN_VALUE;
 
-		
 		for (Node successor : node.getSuccessors()) {
 			v = Math.max(v, minValue(successor));
 		}
@@ -35,7 +34,7 @@ public class MinimaxAlgo {
 	// return v
 	public int minValue(Node node) {
 		if (node.isTerminal()) {
-			return node.getUtility(); // Return utility value if the node is a terminal node
+			return 1; // Return utility value if the node is a terminal node
 		}
 		int v = Integer.MAX_VALUE;
 

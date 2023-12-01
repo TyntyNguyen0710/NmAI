@@ -42,12 +42,6 @@ public class Node {
 	public boolean isTerminal() {
 		for (int i = 0; i < data.size(); i++) {
 			for (int j = 0; j < data.size(); j++) {
-//				 if (i!=j) {
-//				        if (data.size() % 2 == 0) {
-//				            return false;
-//				        } else { 
-//				            return true;
-//				        }
 				if (data.get(i) % data.get(j) == 0 || data.get(j) % data.get(i) == 0)
 					return false;
 			}
@@ -67,14 +61,5 @@ public class Node {
 	public String toString() {
 		Collections.sort(this.data, DESCOMPARATOR);
 		return this.data.toString();
-	}
-
-	public int getUtility() {
-		if (isTerminal()) {
-			if (data.size() % 2 == 0) {
-				return 1;
-			}
-		}
-		return 0;
 	}
 }
