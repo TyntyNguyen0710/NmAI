@@ -19,7 +19,7 @@ public class MinimaxAlgo {
 			return node.getUtility(); // Return utility value if the node is a terminal node
 		}
 		int v = Integer.MIN_VALUE;
-		 Collections.sort(node.getSuccessors(), Node.DESCOMPARATOR);
+
 		
 		for (Node successor : node.getSuccessors()) {
 			v = Math.max(v, minValue(successor));

@@ -70,8 +70,11 @@ public class Node {
 	}
 
 	public int getUtility() {
-		// TODO Auto-generated method stub
+		if (isTerminal()) {
+			if (data.size() % 2 == 0) {
+				return 1;
+			}
+		}
 		return 0;
 	}
-
 }
