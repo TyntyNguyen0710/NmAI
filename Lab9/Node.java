@@ -23,7 +23,7 @@ public class Node {
 		for (int i = 0; i < data.size(); i++) {
 			int current = data.get(i);
 			for (int j = 1; j <= current / 2; j++) {
-				if (j != current / 2) {
+				if (j != current - j) {
 					Node success = new Node();
 					success.add(j);
 					success.add(current - j);
@@ -32,6 +32,8 @@ public class Node {
 							success.add(data.get(k));
 					}
 					re.add(success);
+					if (!re.contains(success))
+						re.add(success);
 				}
 			}
 		}
@@ -41,7 +43,7 @@ public class Node {
 	// Check whether a node is terminal or not
 	public boolean isTerminal() {
 		for (int i = 0; i < data.size(); i++) {
-			for (int j = 0; j < data.size(); j++) {
+			for (int j = 1; j < data.size(); j++) {
 				if (data.get(i) % data.get(j) == 0 || data.get(j) % data.get(i) == 0)
 					return false;
 			}
